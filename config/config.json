@@ -1,0 +1,14 @@
+{
+    "Stripo": {
+        "DefaultTemplate": {
+            "css": "https://raw.githubusercontent.com/ardas/stripo-plugin/master/Public-Templates/Basic-Templates/Trigger%20newsletter%20mockup/Trigger%20newsletter%20mockup.css",
+            "html": "https://raw.githubusercontent.com/ardas/stripo-plugin/master/Public-Templates/Basic-Templates/Trigger%20newsletter%20mockup/Trigger%20newsletter%20mockup.html"
+        },
+        "StripoSource": "https://plugins.stripo.email/static/latest/stripo.js",
+        "StipoAuthUrl": "https://plugins.stripo.email/api/v1/auth",
+        "StripoLocalization": "es-mx"
+    },
+    "ContentStack": {
+        "baseUrl": "https://api.contentstack.io/v3/"
+    }
+}

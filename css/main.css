@@ -1,0 +1,59 @@
+#externalSystemContainer {
+    background-color: rgb(169, 169, 169);
+    padding: 5px 0 5px 20px;
+}
+#messageBox{
+    padding: 5px 0 5px 20px;
+    height: 30px;
+    opacity:0;
+    position: relative;
+    z-index: 1;
+}
+#stripoSettingsContainer {
+    width: 400px;
+    float: left;
+}
+#stripoPreviewContainer {
+    width: calc(100% - 400px);
+    float: left;
+}
+.control-button {
+    border-radius: 17px;
+    padding: 5px 10px;
+    border-color: grey;
+}
+
+#overlay{
+    position:fixed;
+    z-index:99999;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    background:rgba(0,0,0,0.9);
+    transition: 1s 0.4s;
+  }
+
+#loaderonrequest{
+    width: 2rem;
+    height: 2rem;
+    border: 5px solid #f3f3f3;
+    border-top: 6px solid #9c41f2;
+    border-radius: 100%;
+    margin: auto;
+    visibility: hidden;
+    animation: spin 1s infinite linear;
+}
+
+#loaderonrequest.display{
+    visibility: visible;
+}
+
+@keyframes spin {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}

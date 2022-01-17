@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Email Stripo Plugin App</title>
+    <link href="./css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="external_preview_popup.css">
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <!-- <script type="application/javascript" src="external_preview_popup.js"></script> -->
+    </link>
+</head>
+
+<body>
+    <div id="overlay">
+        <img src="./img/loader.gif" alt="Loading" style="position: fixed;left: 50%; top: 35%;" height="50" width="50" />
+        Loading...
+   </div>
+    <div id="messageBox" style="display: none;"></div>
+    <div id="externalSystemContainer">
+        <button id="codeEditor" class="control-button">Code editor</button>
+        <button id="previewButton" class="control-button">Preview</button>
+        <button id="saveButton" class="control-button">Save</button>
+    </div>
+    <div>
+        <div id="stripoSettingsContainer">Loading...</div>
+        <div id="stripoPreviewContainer"></div>
+        <div id="loaderonrequest"></div>
+    </div>
+</body>
+
+<script type="module">
+    import { EMAILConfiguration } from './js/configuration.js';
+    import { EMAILInitialization } from './index.js';
+    import { userContextConfiguration } from './js/usercontext.js';
+
+    //  Below commented code is for dev testing purpose
+    // var message = {
+    //     "pluginId": "f7daf1549bed437488ed8c1fe92f3e20",
+    //     "secretKey": "6192a5b950614b5eb8ae05f20f395dec",
+    //     "contentTypeId": "email_designs",
+    //     "entryId": "blt5c27d0ecc2ad0290",
+    //     "apiKey": "blt9c861b1a4b69e623",
+    //     "authToken": "cscf9cc5280760b0ba09ae7a23",
+    //     "customblock": {
+    //         "contenttypeuuid":"custom_block_design"
+    //     },
+    //     "TemplateName": "Email Template",
+    //     "locale":"es-mx",
+    //     "environment":"dev_preview_environment",
+    //     "includefallback":"false"
+    // }
+    /**
+     * This method loads the stripo configuration first and then load the template.
+     * @return stripo configuration from config.json.
+    */
+    window.addEventListener("message", (event) => {
+        console.log("Event data - " , event.data);
+        userContextConfiguration.loadUserContext(event.data).then(res => {
+            EMAILConfiguration.loadStripoConfiguration().then(respose => {
+                EMAILInitialization.loadTemplate(EMAILInitialization.initPlugin);
+            }).catch(err => {
+                console.log(err);
+            })
+        }).catch(err => { console.log(err) })
+   }, false);
+
+</script>
+
+</html>
