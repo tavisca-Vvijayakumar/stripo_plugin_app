@@ -9,7 +9,7 @@ var userContextConfiguration = {
         console.log(userContextObject)
         var bytes = CryptoJS.AES.decrypt(userContextObject, 'secret key 123');
         var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8)); 
-        console.log(decryptedData); // [{id: 1}, {id: 2}]
+        console.log("from usercontext",decryptedData); // [{id: 1}, {id: 2}]
         usercontext = decryptedData;
         return "Ok";
     }
