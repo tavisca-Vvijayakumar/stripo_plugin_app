@@ -101,7 +101,7 @@ var EMAILUtility = {
     getContentStackRequestHeader: function () {
         var header = {
             'api_key': usercontext.apiKey,
-            'authorization': usercontext.authToken,
+            'authtoken': usercontext.authToken,
             'Content-Type': CONTENT_TYPE,
         };
 
