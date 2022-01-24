@@ -102,7 +102,7 @@ var EMAILInitialization = {
 * This method will return html entry response to load plugin.
 */
 async function getTemplateFromEntry() {
-    var url = `${Configuration.ContentStack.baseUrl}` + 'content_types/' + `${usercontext.contentTypeId}` + '/entries/' + `${usercontext.entryId}`;
+    var url = `${Configuration.ContentStack.baseUrl}` + 'content_types/' + `${usercontext.contentTypeId}` + '/entries/' + `${usercontext.entryId}`+'?version='+`${usercontext.version}`;
     var headers = EMAILUtility.getContentStackRequestHeader();
     return await EMAILUtility.createFetchRequest(url, headers, "GET");
 }
@@ -125,7 +125,7 @@ async function saveTemplateToContentStack(htmltext) {
         }
     };
 
-    var url = `${Configuration.ContentStack.baseUrl}` + 'content_types/' + `${usercontext.contentTypeId}` + '/entries/' + `${usercontext.entryId}`;
+    var url = `${Configuration.ContentStack.baseUrl}` + 'content_types/' + `${usercontext.contentTypeId}` + '/entries/' + `${usercontext.entryId}`+'?version='+`${usercontext.version}`;
     var headers = EMAILUtility.getContentStackRequestHeader();
 
     var successCode = await EMAILUtility.createFetchRequest(url, headers, "PUT", data);
