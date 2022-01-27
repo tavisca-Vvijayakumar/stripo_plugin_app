@@ -121,7 +121,7 @@ async function saveTemplateToContentStack(htmltext) {
             "full_html_content": htmltext,
             "tags": [],
             //TODO Need to pass locale from stripo
-            "locale": "en-us"
+            "locale": usercontext.locale
         }
     };
 
