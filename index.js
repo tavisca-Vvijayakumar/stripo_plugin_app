@@ -103,7 +103,8 @@ var EMAILInitialization = {
 */
 async function getTemplateFromEntry() {
     var queryParameter = {
-        locale: usercontext.locale
+        locale: usercontext.locale,
+        version: usercontext.version
     }
     var url = `${Configuration.ContentStack.baseUrl}` + 'content_types/' + `${usercontext.contentTypeId}`
                      + '/entries/' + `${usercontext.entryId}?` + addQueryParametersToContentStackUrl(queryParameter);
@@ -119,7 +120,8 @@ async function saveTemplateToContentStack(htmltext) {
     var queryParameter = {
         form_uid: usercontext.customblock.contenttypeuuid,
         entry_uid: usercontext.entryId,
-        locale: usercontext.locale
+        locale: usercontext.locale,
+        version: usercontext.version
     }
     var response = retrieveContentBlockContentFromHTML(htmltext);
 
