@@ -234,12 +234,18 @@ async function creplace(html) {
         ExternalPreviewPopup.openPreviewPopup(StringHTML);
     }
     for (var i = 0; i < customBlockNodeList.length; i++) {
+        
+        var queryParameter = {
+        locale: usercontext.locale,
+        includefallback: usercontext.includefallback
+        }
+        
         var element = customBlockNodeList[i];
         var outerhtml = element.outerHTML;
         EntryUID = element.getAttribute('selectedblocktypeuid');
         ContenttypeUID = element.getAttribute('selectedcontenttype');
         var headers = EMAILUtility.getContentStackRequestHeader();
-        var url = `${Configuration.ContentStack.baseUrl}` + 'content_types/' + ContenttypeUID + '/entries/' + EntryUID;
+        var url = `${Configuration.ContentStack.baseUrl}` + 'content_types/' + ContenttypeUID + '/entries/' + EntryUID + '?' + addQueryParametersToContentStackUrl(queryParameter);
         var successCode = await EMAILUtility.createFetchRequest(url, headers, "GET")
         StringHTML = StringHTML.replace(outerhtml, successCode.entry.multi_line);
     }
