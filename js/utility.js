@@ -172,6 +172,37 @@ var MyObj =
             "value": "10 0ct 21/10:30"
         }
     ]
+},
+{
+    "category": "Personal detail",
+    "entries": [
+        {
+        "label": "FirstName",
+        "value": "{{FirstName}}",
+        },
+        {
+        "label": "Last Name",
+        "value": "{{LastName}}"
+        },
+        {
+        "label": "Trip ID",
+        "value": "{{Trip ID}}"
+        }
+        ,
+        {
+        "label": "Program Phone",
+        "value": "{{ProgramPhone}}"
+        }
+        ,
+        {
+        "label": "Sign In",
+        "value": "{{SignIn}}"
+        },
+        {
+        "label": "Logo",
+        "value": "{{Logo}}"
+        }
+    ]
 }]
 
 export { EMAILUtility ,MyObj}
