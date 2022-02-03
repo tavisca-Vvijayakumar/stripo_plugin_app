@@ -16,7 +16,7 @@ var EMAILInitialization = {
     */
     loadTemplate: function (callback) {
         this.convertTextAsPerLocale();
-        getTemplateFromEntry().then(response => {
+        getTemplateFromEntry().then(async response => {
             let content = response.entry.full_html_content;
 
             var parser = new DOMParser();
