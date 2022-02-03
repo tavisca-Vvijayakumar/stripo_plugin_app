@@ -18,6 +18,34 @@ var EMAILInitialization = {
         this.convertTextAsPerLocale();
         getTemplateFromEntry().then(response => {
             let content = response.entry.full_html_content;
+
+            var parser = new DOMParser();
+            var doc = parser.parseFromString(content, "text/html");
+            var customBlockNodeList = doc.querySelectorAll('custom-block');
+            if (customBlockNodeList.length == 0) {
+                // ExternalPreviewPopup.openPreviewPopup(content);
+            }
+            for (var i = 0; i < customBlockNodeList.length; i++) {
+                var element = customBlockNodeList[i];
+                var outerhtml = element.outerHTML;
+                var entryUID = element.getAttribute('selectedblocktypeuid');
+                var contenttypeUID = element.getAttribute('selectedcontenttype');
+
+                var queryParameter = {
+                    environment: usercontext.environment,
+                    locale: usercontext.locale,
+                    includefallback: usercontext.includefallback
+                }
+
+                var url = `${Configuration.ContentStack.baseUrl}` + 'content_types/' + contenttypeUID + '/entries/' + entryUID
+                    + '?' + addQueryParametersToContentStackUrl(queryParameter);
+                var headers = EMAILUtility.getContentStackRequestHeader();
+
+                var response = await EMAILUtility.createFetchRequest(url, headers, "GET");
+
+                content = content.replace(outerhtml, response.entry.multi_line);
+            }
+            
             if (content == "" || content === undefined) {
                 const url = './components/blankstripostructure.html';
                 request('GET', url, null, function (html) {
@@ -195,7 +223,8 @@ var loadContentBlocksGroup = async function () {
                 "name": element.name === undefined ? element.title : element.name,
                 "placeholder": element.placeholdertext,
                 "contenttype": usercontext.customblock.contenttypeuuid,
-                "locale": element.locale
+                "locale": element.locale,
+                "multilinecontent": element.multi_line
             }
 
             contentBlockGroupList.push(group);
@@ -226,8 +255,8 @@ document.querySelector("#saveButton").addEventListener('click', function (data) 
     })
 });
 async function creplace(html) {
-    var EntryUID = "";
-    var ContenttypeUID = "";
+   var entryUID = "";
+    var contenttypeUID = "";
     var StringHTML = html;
     var parser = new DOMParser();
     var doc = parser.parseFromString(html, "text/html");
@@ -236,20 +265,27 @@ async function creplace(html) {
         ExternalPreviewPopup.openPreviewPopup(StringHTML);
     }
     for (var i = 0; i < customBlockNodeList.length; i++) {
-        
-        var queryParameter = {
-        locale: usercontext.locale,
-        includefallback: usercontext.includefallback
-        }
-        
         var element = customBlockNodeList[i];
         var outerhtml = element.outerHTML;
-        EntryUID = element.getAttribute('selectedblocktypeuid');
-        ContenttypeUID = element.getAttribute('selectedcontenttype');
+        entryUID = element.getAttribute('selectedblocktypeuid');
+        contenttypeUID = element.getAttribute('selectedcontenttype');
+
+        var queryParameter = {
+            environment: usercontext.environment,
+            locale: usercontext.locale,
+            includefallback: usercontext.includefallback
+        }
+
+        var url = `${Configuration.ContentStack.baseUrl}` + 'content_types/' + contenttypeUID + '/entries/' + entryUID
+            + '?' + addQueryParametersToContentStackUrl(queryParameter);
         var headers = EMAILUtility.getContentStackRequestHeader();
-        var url = `${Configuration.ContentStack.baseUrl}` + 'content_types/' + ContenttypeUID + '/entries/' + EntryUID + '?' + addQueryParametersToContentStackUrl(queryParameter);
-        var successCode = await EMAILUtility.createFetchRequest(url, headers, "GET")
-        StringHTML = StringHTML.replace(outerhtml, successCode.entry.multi_line);
+
+        var response = await EMAILUtility.createFetchRequest(url, headers, "GET");
+
+        // var headers = EMAILUtility.getContentStackRequestHeader();
+        //var url = `${Configuration.ContentStack.baseUrl}` + 'content_types/' + ContenttypeUID + '/entries/' + EntryUID;
+        //var successCode = await EMAILUtility.createFetchRequest(url, headers, "GET")
+        StringHTML = StringHTML.replace(outerhtml, response.entry.multi_line);
     }
     ExternalPreviewPopup.openPreviewPopup(StringHTML);
     // return StringHTML;
