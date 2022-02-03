@@ -100,7 +100,7 @@ var EMAILInitialization = {
                 extensions: [
                     {
                         globalName: "CustomBlockExtension",
-                        url: "https://tavisca-vvijayakumar.github.io/important_information_mainjs/importantInformationBlock1.extension.js"
+                        url: "https://tavisca-vvijayakumar.github.io/important_information_mainjs/importantInformationBlock.extension.js"
                     }
                 ],
                 "blockConfiguration": {
@@ -149,6 +149,18 @@ async function getTemplateFromEntry() {
 * This method will save modified template to content stack
 */
 async function saveTemplateToContentStack(htmltext) {
+    
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(htmltext, "text/html");
+    var customBlockNodeList = doc.querySelectorAll('custom-block');
+
+    for (var i = 0; i < customBlockNodeList.length; i++) {
+        customBlockNodeList[i].innerHTML = "";
+    }
+
+    if (customBlockNodeList.length > 0) {
+        htmltext = doc.documentElement.outerHTML;
+    }
 
     var queryParameter = {
         form_uid: usercontext.customblock.contenttypeuuid,
