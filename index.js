@@ -27,12 +27,12 @@ var EMAILInitialization = {
             }
             for (var i = 0; i < customBlockNodeList.length; i++) {
                 var element = customBlockNodeList[i];
-                var outerhtml = element.outerHTML;
+                var outerhtml = element.innerHTML;
                 var entryUID = element.getAttribute('selectedblocktypeuid');
                 var contenttypeUID = element.getAttribute('selectedcontenttype');
 
                 var queryParameter = {
-                    environment: usercontext.environment,
+                    //environment: usercontext.environment,
                     locale: usercontext.locale,
                     includefallback: usercontext.includefallback
                 }
@@ -43,7 +43,12 @@ var EMAILInitialization = {
 
                 var response = await EMAILUtility.createFetchRequest(url, headers, "GET");
 
-                content = content.replace(outerhtml, response.entry.multi_line);
+                customBlockNodeList[i].innerHTML = response.entry.multi_line;
+                //content = content.replace(outerhtml, response.entry.multi_line);
+            }
+
+            if (customBlockNodeList.length > 0) {
+                content = doc.documentElement.innerHTML;
             }
             
             if (content == "" || content === undefined) {
@@ -203,7 +208,6 @@ var request = function (method, url, data, callback) {
 
 var loadContentBlocksGroup = async function () {
     var queryParameter = {
-        environment: usercontext.environment,
         locale: usercontext.locale,
         includefallback: usercontext.includefallback
     }
@@ -271,7 +275,6 @@ async function creplace(html) {
         contenttypeUID = element.getAttribute('selectedcontenttype');
 
         var queryParameter = {
-            environment: usercontext.environment,
             locale: usercontext.locale,
             includefallback: usercontext.includefallback
         }
