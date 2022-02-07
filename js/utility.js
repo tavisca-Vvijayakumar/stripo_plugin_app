@@ -142,6 +142,81 @@ var EMAILUtility = {
     }
 }
 
+var MyObj = 
+    [{
+    "category": "Flight detail",
+    "entries": [
+        {
+            "label": "Flight Name",
+            "value": "{{FlightName}}",
+        },
+        {
+            "label": "Flight Number",
+            "value": "{{FlightNumber}}"
+        },
+        {
+            "label": "Depart",
+            "value": "{{Departat}}"
+        },
+        {
+            "label": "Arrive",
+            "value": "{{Arriveat}}"
+        },
+
+        {
+            "label": "Airport/Terminal",
+            "value": "{{Airport/Terminal}}"
+        },
+    ]
+},
+{
+    "category": "Hotel detail",
+    "entries": [
+        {
+            "label": "Hotel Name",
+            "value": "air india",
+        },
+        {
+            "label": "Hotel Address",
+            "value": "EK 345"
+        },
+        {
+            "label": "Landmark",
+            "value": "10 0ct 21/10:30"
+        }
+    ]
+},
+{
+    "category": "Personal detail",
+    "entries": [
+        {
+        "label": "FirstName",
+        "value": "{{FirstName}}",
+        },
+        {
+        "label": "Last Name",
+        "value": "{{LastName}}"
+        },
+        {
+        "label": "Trip ID",
+        "value": "{{Trip ID}}"
+        }
+        ,
+        {
+        "label": "Program Phone",
+        "value": "{{ProgramPhone}}"
+        }
+        ,
+        {
+        "label": "Sign In",
+        "value": "{{SignIn}}"
+        },
+        {
+        "label": "Logo",
+        "value": "{{Logo}}"
+        }
+    ]
+}]
 
 
 export { EMAILUtility ,MyObj}
