@@ -96,7 +96,7 @@ var EMAILInitialization = {
         script.src = Configuration.Stripo.StripoSource;
         script.onload = async function () {
             window.Stripo.init({
-                mergeTags: await loadmergetags(),
+                mergeTags: MyObj,
                 extensions: [
                     {
                         globalName: "CustomBlockExtension",
