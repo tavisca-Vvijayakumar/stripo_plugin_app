@@ -96,7 +96,7 @@ var EMAILInitialization = {
         script.src = Configuration.Stripo.StripoSource;
         script.onload = async function () {
             window.Stripo.init({
-                mergeTags: MyObj,
+                mergeTags: await loadmergetags(),
                 extensions: [
                     {
                         globalName: "CustomBlockExtension",
@@ -250,6 +250,12 @@ var loadContentBlocksGroup = async function () {
     }
 
     return [];
+}
+
+var loadmergetags = async function () {
+    mergeTags  = await EMAILUtility.GetMergTags("https://localhost:44389/api/v1.0/Template/get-mergetags-async","","GET");
+    console.log(mergeTags);
+    return mergeTags;
 }
 
 var addQueryParametersToContentStackUrl = function (queryParameter) {
